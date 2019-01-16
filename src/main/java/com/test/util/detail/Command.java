@@ -1,4 +1,4 @@
-package com.test.util;
+package com.test.util.detail;
 import org.joda.time.DateTime;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package com.test.util;
+package com.test.util.detail;
 
 import org.apache.commons.codec.binary.Base64;
 import sun.misc.BASE64Decoder;

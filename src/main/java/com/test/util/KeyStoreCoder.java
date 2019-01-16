@@ -1,10 +1,9 @@
 package com.test.util;
 
-import sun.plugin2.util.SystemUtil;
+import com.test.util.detail.KeyStoreTool;
+import com.test.util.detail.PrivPubKeyBean;
+import org.springframework.util.Base64Utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.Serializable;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -12,52 +11,20 @@ import java.security.cert.X509Certificate;
 
 public class KeyStoreCoder {
     public static void main(String[] args) throws Exception {
-         KeyStoreCoder.getKeyStore("D:\\cer\\test1547609262469.keystore","123456");
+        PrivPubKeyBean bean = KeyStoreCoder.getPrivPubKeyBean("D:\\cer\\test1547609262469.keystore","123456","SEC_TEST");
+       if (bean!=null){
+           PublicKey publicKey = bean.getPublKey();
+           byte[] publicKeyEncoded = publicKey.getEncoded();
+           System.out.println("公钥："+""+Base64Utils.encodeToString(publicKeyEncoded));
+           System.out.println("公钥："+""+ Base64Util.encryptBASE64(publicKeyEncoded));
+           PrivateKey privatekey = bean.getPrivKey();
+           byte[] privatekeyEncoded = privatekey.getEncoded();
+           System.out.println("私钥："+""+Base64Utils.encodeToString(privatekeyEncoded));
+           System.out.println("私钥："+""+Base64Util.encryptBASE64(privatekeyEncoded));
+
+       }
     }
-    /**
-     * Java密钥库(Java Key Store，JKS)KEY_STORE
-     */
-    public static final String KEY_STORE = "JKS";
-    public static class PrivPubKeyBean implements Serializable {
 
-        private static final long serialVersionUID = 1888415926054715509L;
-        /***
-         * 私钥
-         */
-        private PrivateKey privKey;
-        /***
-         * 公钥
-         */
-        private PublicKey publKey;
-        /***
-         * 签名算法
-         */
-        private String sigAlgName;
-
-        public PrivateKey getPrivKey() {
-            return privKey;
-        }
-
-        public void setPrivKey(PrivateKey privKey) {
-            this.privKey = privKey;
-        }
-
-        public PublicKey getPublKey() {
-            return publKey;
-        }
-
-        public void setPublKey(PublicKey publKey) {
-            this.publKey = publKey;
-        }
-
-        public String getSigAlgName() {
-            return sigAlgName;
-        }
-
-        public void setSigAlgName(String sigAlgName) {
-            this.sigAlgName = sigAlgName;
-        }
-    }
     /***
      *
      * @param keyStorePath
@@ -69,7 +36,7 @@ public class KeyStoreCoder {
     public static PrivPubKeyBean getPrivPubKeyBean(String keyStorePath,String password,String alias) throws Exception{
         PrivPubKeyBean privPubKeyBean=new PrivPubKeyBean();
         // 获得密钥库
-        KeyStore ks = KeyStoreCoder. getKeyStore(keyStorePath, password);
+        KeyStore ks = KeyStoreTool. getKeyStore(keyStorePath, password);
         // 获得私钥
         PrivateKey privateKey = (PrivateKey) ks.getKey(alias, password.toCharArray());
         privPubKeyBean.setPrivKey(privateKey);
@@ -81,22 +48,6 @@ public class KeyStoreCoder {
         privPubKeyBean.setSigAlgName(x509Certificate.getSigAlgName());
         return privPubKeyBean;
     }
-    public static KeyStore getKeyStore(String keyStorePath, String password)
-            throws Exception {
 
-        try(FileInputStream is = new FileInputStream(new File(keyStorePath))) {
-            KeyStore ks = KeyStore.getInstance(KEY_STORE);
-            ks.load(is, password.toCharArray());
-            is.close();
-            return ks;
-        }
-        catch (Exception e){
-
-        }finally {
-
-        }
-        return null;
-
-    }
 
 }

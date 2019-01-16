@@ -1,4 +1,4 @@
-package com.test.util;
+package com.test.util.detail;
 
 import sun.misc.BASE64Encoder;
 
