@@ -1,5 +1,6 @@
 package com.test.util.detail;
 
+import org.springframework.util.Base64Utils;
 import sun.misc.BASE64Encoder;
 
 import java.io.FileInputStream;
@@ -7,6 +8,9 @@ import java.security.PublicKey;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
+/**
+ * 通过cer拿到公钥
+ */
 public class CertUtil {
 
     /**
@@ -37,17 +41,20 @@ public class CertUtil {
             PublicKey publicKey = x509Certificate.getPublicKey();
             BASE64Encoder base64Encoder=new BASE64Encoder();
             String publicKeyString = base64Encoder.encode(publicKey.getEncoded());
-            System.out.println("-----------------公钥开始-------------------");
-            System.out.println(publicKeyString);
-            System.out.println("-----------------公钥结束--------------------");
+//            System.out.println("-----------------公钥开始-------------------");
+//            System.out.println(publicKeyString);
+//            System.out.println("-----------------公钥结束--------------------");
             return x509Certificate;
         }
 
-        public static String getPublicKeyString(String cerPath)throws Exception {
-            X509Certificate certificate = getX509CerCate(cerPath);
-            PublicKey publicKey = certificate.getPublicKey();
-            BASE64Encoder base64Encoder=new BASE64Encoder();
-            String publicKeyString = base64Encoder.encode(publicKey.getEncoded());
+    public static byte [] getPublicKeyByteArray(String cerPath)throws Exception {
+        X509Certificate certificate = getX509CerCate(cerPath);
+        PublicKey publicKey = certificate.getPublicKey();
+        return publicKey.getEncoded();
+    }
+        public static String getPublicKeyStringEncodeByBase64(String cerPath)throws Exception {
+            byte [] data  = CertUtil.getPublicKeyByteArray(cerPath);
+            String publicKeyString = Base64Utils.encodeToString(data);
             System.out.println("-----------------公钥开始-------------------");
             System.out.println(publicKeyString);
             System.out.println("-----------------公钥结束--------------------");

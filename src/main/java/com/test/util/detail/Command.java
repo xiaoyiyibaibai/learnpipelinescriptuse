@@ -41,7 +41,7 @@ public class Command {
         Command.exeCmd(keystore);
         Thread.sleep(3000);
         //导出公钥
-        new File("d:/cer/test_pub_cer.cer").deleteOnExit();
+        //new File("d:/cer/test_pub_cer.cer").deleteOnExit();
         Thread.sleep(1000);
         String cer = "keytool -export -alias SEC_TEST -file d:/cer/test_pub_cer.cer -keystore d:/cer/test"+thistime+".keystore -storepass 123456";
         Command.exeCmd(cer);
