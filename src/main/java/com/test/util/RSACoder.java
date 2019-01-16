@@ -1,6 +1,8 @@
 package com.test.util;
 
 import org.apache.commons.codec.binary.Base64;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import java.awt.geom.AffineTransform;
@@ -62,6 +64,33 @@ public class RSACoder {
         }
     }
 
+    /**
+     * base64的加密和解密
+     */
+    public static class Coder {
+
+        /**
+         * BASE64解密
+         *
+         * @param key
+         * @return
+         * @throws Exception
+         */
+        public static byte[] decryptBASE64(String key) throws Exception {
+            return (new BASE64Decoder()).decodeBuffer(key);
+        }
+
+        /**
+         * BASE64加密
+         *
+         * @param key
+         * @return
+         * @throws Exception
+         */
+        public static String encryptBASE64(byte[] key) throws Exception {
+            return (new BASE64Encoder()).encodeBuffer(key).replace("\r", "").replace("\n", "");
+        }
+    }
    public static class AFactUtil{
        /**
         * 取得私钥
@@ -171,11 +200,8 @@ public class RSACoder {
     }
 
 
-
-
-
-
-
+    public static byte[] privateKeyStatic = null;
+    public static byte[] publicKeyStatic = null;
     /**
      * @param args
      * @throws Exception
@@ -186,11 +212,17 @@ public class RSACoder {
         Map<String, Object> keyMap = KeyMapUtil.initKey();
         //公钥
         byte[] publicKey = BFactUtil.getPublicKey(keyMap);
+        if (publicKeyStatic==null){
+            publicKeyStatic = publicKey;
+        }
 
         //私钥
         byte[] privateKey = AFactUtil.getPrivateKey(keyMap);
-        System.out.println("公钥：\n" + Base64.encodeBase64String(publicKey));
-        System.out.println("私钥：\n" + Base64.encodeBase64String(privateKey));
+        if (privateKeyStatic==null){
+            privateKeyStatic =  privateKey;
+        }
+        System.out.println("公钥：\n" + Base64.encodeBase64String(publicKeyStatic));
+        System.out.println("私钥：\n" + Base64.encodeBase64String(publicKeyStatic));
 
         System.out.println("================密钥对构造完毕,甲方将公钥公布给乙方，开始进行加密数据的传输=============");
         String str = "RSA密码交换算法";
@@ -214,7 +246,6 @@ public class RSACoder {
         byte[] code2 = BFactUtil.encryptByPublicKey(str.getBytes(), publicKey);
         System.out.println("===========乙方使用公钥对数据进行加密==============");
         System.out.println("加密后的数据：" + Base64.encodeBase64String(code2));
-
         System.out.println("=============乙方将数据传送给甲方======================");
         System.out.println("===========甲方使用私钥对数据进行解密==============");
 
