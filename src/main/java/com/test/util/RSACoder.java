@@ -17,7 +17,7 @@ import java.util.Map;
  * 非对称加密算法RSA算法组件
  * 非对称算法一般是用来传送对称加密算法的密钥来使用的，相对于DH算法，RSA算法只需要一方构造密钥，不需要
  * 大费周章的构造各自本地的密钥对了。DH算法只能算法非对称算法的底层实现。而RSA算法算法实现起来较为简单
- *
+ *   甲方和乙方 共享 Map 和各自的key
  * @author kongqz
  */
 public class RSACoder {
@@ -28,11 +28,11 @@ public class RSACoder {
      * 密钥长度必须是64的倍数，在512到65536位之间
      */
     private static final int KEY_SIZE = 512;
-    //公钥
-    private static final String PUBLIC_KEY = "RSAPublicKey";
+    //公钥  -- 自定义的key，任意字符串
+    private static final String PUBLIC_KEY = "abc123";
 
-    //私钥
-    private static final String PRIVATE_KEY = "RSAPrivateKey";
+    //私钥   -- 自定义的key，任意字符串
+    private static final String PRIVATE_KEY = "xyz123";
 
     public static class KeyMapUtil{
         /**
@@ -54,7 +54,9 @@ public class RSACoder {
             //将密钥存储在map中
             Map<String, Object> keyMap = new HashMap<String, Object>();
             keyMap.put(PUBLIC_KEY, publicKey);
+            System.out.println(publicKey.getModulus());
             keyMap.put(PRIVATE_KEY, privateKey);
+            System.out.println(publicKey.getModulus());
             return keyMap;
 
         }
@@ -187,8 +189,8 @@ public class RSACoder {
 
         //私钥
         byte[] privateKey = AFactUtil.getPrivateKey(keyMap);
-        System.out.println("公钥：/n" + Base64.encodeBase64String(publicKey));
-        System.out.println("私钥：/n" + Base64.encodeBase64String(privateKey));
+        System.out.println("公钥：\n" + Base64.encodeBase64String(publicKey));
+        System.out.println("私钥：\n" + Base64.encodeBase64String(privateKey));
 
         System.out.println("================密钥对构造完毕,甲方将公钥公布给乙方，开始进行加密数据的传输=============");
         String str = "RSA密码交换算法";
