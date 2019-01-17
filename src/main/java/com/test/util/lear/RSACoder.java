@@ -1,6 +1,6 @@
-package com.test.util.detail;
+package com.test.util.lear;
 
-import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.Base64;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 

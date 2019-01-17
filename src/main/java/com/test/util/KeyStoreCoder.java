@@ -33,10 +33,6 @@ public class KeyStoreCoder {
           System.out.println("使用私钥进行加密\n");
           byte [] encryptByPrivateStr =  RSAEncodeAndDecodeUtil.encryptByPrivateKey(testByte,privatekeyEncoded);
 
-
-
-
-
           byte [] decryByPublicKey = RSAEncodeAndDecodeUtil.decryptByPublicKey(encryptByPrivateStr,publicKeyEncoded);
           System.out.println("keystore中公钥解密后数据："+new String(decryByPublicKey));
 
@@ -55,8 +51,6 @@ public class KeyStoreCoder {
            byte []  encryptByPrivateStr2 = RSAEncodeAndDecodeUtil.encryptByPrivateKey(testByte,base64decode);
            byte [] decryByPublicKey2 = RSAEncodeAndDecodeUtil.decryptByPublicKey(encryptByPrivateStr2,publicKeyEncoded);
            System.out.println("keystore中公钥解密后数据："+new String(decryByPublicKey2));
-
-
        }
     }
 
@@ -71,7 +65,7 @@ public class KeyStoreCoder {
     public static PrivPubKeyBean getPrivPubKeyBean(String keyStorePath,String password,String alias) throws Exception{
         PrivPubKeyBean privPubKeyBean=new PrivPubKeyBean();
         // 获得密钥库
-        KeyStore ks = KeyStoreTool. getKeyStore(keyStorePath, password);
+        KeyStore ks = KeyStoreTool.getKeyStore(keyStorePath, password);
         // 获得私钥
         PrivateKey privateKey = (PrivateKey) ks.getKey(alias, password.toCharArray());
         privPubKeyBean.setPrivKey(privateKey);

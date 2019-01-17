@@ -35,6 +35,7 @@ public class Command {
 
     public static void main(String[] args) throws Exception {
         //生成keystore
+
         long thistime = DateTime.now().getMillis();
         String keystore = "keytool -genkey -keyalg RSA -keysize 2048 -validity 36500 -alias SEC_TEST -keypass 123456 -keystore d:/cer/test"+thistime+".keystore -storepass 123456 -dname \"CN=localhost,OU=DEP,O=CN,L=BJ,ST=BJ,C=CN\"";
         //String commandStr = "ipconfig";

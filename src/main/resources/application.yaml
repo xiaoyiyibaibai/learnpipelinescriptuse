@@ -1,2 +1,9 @@
 server:
   port: 28080
+spring:
+  mail:
+    password: a250604a
+    username: a250604@sina.com
+    port: 25
+    protocol: smtp
+    host: smtp.sina.com
