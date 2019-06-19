@@ -9,16 +9,26 @@ timestamps{
         echo "I said, Hello Mr. ${username}";
         node {
           stage('prepare') {
-          withEnv(['MYName=xiaodonghong']) {
-              println("我设置了环境变量--MYName=xiaodonghong");
-          }
+             if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
+                  if(currentBuild.nextBuild){
+                    println("skip this build"+currentBuild.id);
+                    return ;
+                  }else{
+                    println("wait previousBuild ");
+                    Thread.sleep(2000);
+                  }
 
-          println("自定义的环境变量是${env.MYName}")
-          println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
-            withEnv(['XIAODONGHONG_TEST=肖东红']) {
-                // some block
-            }
-          println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
+                }
+                  withEnv(['MYName=xiaodonghong']) {
+                      println("我设置了环境变量--MYName=xiaodonghong");
+                  }
+
+              println("自定义的环境变量是${env.MYName}")
+              println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
+               withEnv(['XIAODONGHONG_TEST=肖东红']) {
+                    println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
+                }
+             println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
            // 输出参数信息 println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
           //  mail(
@@ -55,7 +65,7 @@ timestamps{
 
                println("readFile 的读取绝对路径地址=/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml");
                def text2 =  readFile(encoding: 'UTF-8', file: '/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml');
-                println("readFile 的读取绝对路径地址"+text2);
+               println("readFile 的读取绝对路径地址"+text2);
            }
            stage('checkout') {
                println("checkout scm");
@@ -71,7 +81,10 @@ timestamps{
                archiveArtifacts('pom.xml,Jenkinsfile');
                println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
            }
+
+
             stage('Build') {
+             // 使用maven进行打包
 
                 println("build stage");
             }
@@ -89,6 +102,12 @@ timestamps{
     }
     catch(e){
      println("异常信息="+e.getMessage());
-    }
+    }finally {
+             if (currentBuild.result == 'UNSTABLE') {
+                 echo 'I am unstable :/'
+             } else {
+                 echo 'One way or another, I have finished'
+             }
+         }
 
 }
