@@ -7,6 +7,8 @@ timestamps{
            }
            stage('checkout') {
                println("checkout scm");
+              // 导出git的代码
+               checkout(scm);
            }
             stage('Build') {
                 println("build stage");
