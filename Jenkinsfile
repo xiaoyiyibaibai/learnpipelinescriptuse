@@ -51,7 +51,7 @@ timestamps{
               }else{
                  println("fileExists('test.keystore') false");
               }
-
+ junit '**/target/*.xml'
                println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
                archiveArtifacts('pom.xml,Jenkinsfile');
                println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
@@ -61,6 +61,7 @@ timestamps{
                 println("build stage");
             }
             stage('Test') {
+                junit '**/target/*.xml';
                 println("Test stage");
             }
             stage('Deploy') {
