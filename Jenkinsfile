@@ -13,6 +13,9 @@ timestamps{
           //       body: '我是content'
           //     );
            // 准备阶段1.先判断上一个构建是否完成
+emailext(body: '我是邮件emailext', subject: '我是邮件emailext', to: 'xiaodonghong@gsafety.com');
+
+
 
             println("prepare stage");
            }
