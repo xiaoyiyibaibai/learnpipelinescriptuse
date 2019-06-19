@@ -6,11 +6,10 @@ timestamps{
           stage('prepare') {
             // 发送邮件
            mail(
-               from: 'a250604@sina.com',
                 subject:"我要发邮件了",
                 cc:"xiaodonghong@gsafety.com",
                 to:"xiaodonghong@gsafety",
-                content:"我是content"
+                body:"我是content"
               );
            // 准备阶段1.先判断上一个构建是否完成
 
