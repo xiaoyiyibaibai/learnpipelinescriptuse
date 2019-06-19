@@ -84,8 +84,10 @@ timestamps{
 
 
             stage('Build') {
-             // 使用maven进行打包
-
+               println("build stage-使用maven进行打包");
+                 // 使用maven进行打包
+                def toolresult =tool(name: 'maven', type: 'maven');
+                println("tools results ="+toolresult);
                 println("build stage");
             }
             stage('Test') {
