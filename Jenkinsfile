@@ -4,15 +4,17 @@ timestamps{
      //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
         // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
         node {
-
           stage('prepare') {
-
           withEnv(['MYName=xiaodonghong']) {
               println("我设置了环境变量--MYName=xiaodonghong");
           }
 
           println("自定义的环境变量是${env.MYName}")
-
+          println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
+           withEnv(['XIAODONGHONG_TEST=xiaodonghong']) {
+                        println("我设置了环境变量--XIAODONGHONG_TEST=xiaodonghong");
+           }
+          println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
            // 输出参数信息 println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
           //  mail(
