@@ -63,7 +63,6 @@ timestamps{
                 println("build stage");
             }
             stage('Test') {
-                junit '**/target/*.xml';
                 println("Test stage");
             }
             stage('Deploy') {
