@@ -90,9 +90,13 @@ timestamps{
                 println("tools results ="+toolresult);
                 println("build stage");
             }
+
+
             stage('Test') {
-                println("Test stage");
+                println("单元测试 stage");
             }
+
+
             stage('Deploy') {
           // 必须有此条件，才可以部署
                if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
