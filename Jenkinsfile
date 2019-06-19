@@ -96,7 +96,12 @@ timestamps{
                def status = sh(returnStatus: true,
                      script: mvnpath
                      );
+
                  println("status="+status);
+                if(status>0){
+                  println("mvn package 执行失败！"+status);
+                }
+
 
                 // jdk的路径
                 def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
