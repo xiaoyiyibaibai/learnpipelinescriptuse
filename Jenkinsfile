@@ -17,6 +17,9 @@ timestamps{
              content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
             emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
             println("prepare stage");
+             println("error 标记-start");
+            error('错误信息');
+             println("error 标记-end");
            }
            stage('checkout') {
                println("checkout scm");
