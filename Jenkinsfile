@@ -13,13 +13,20 @@ timestamps{
           //       body: '我是content'
           //     );
            // 准备阶段1.先判断上一个构建是否完成
-             def  content = "列举一些全局变量--";
-             content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
-            emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
-            println("prepare stage");
-             println("error 标记-start");
-            error('错误信息');
-             println("error 标记-end");
+               def  content = "列举一些全局变量--";
+               content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
+               emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
+                println("prepare stage");
+               println("error 标记-start");
+                // 遇到次标记，抛出异常，不再进行下面的操作。error('错误信息');
+               println("error 标记-end");
+               def flag = fileExists('test.keystore');
+               if(flag){
+                 println("fileExists('test.keystore') true");
+               }else{
+                  println("fileExists('test.keystore') false");
+               }
+
            }
            stage('checkout') {
                println("checkout scm");
