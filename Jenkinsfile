@@ -33,11 +33,11 @@ timestamps{
                 writeFile(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
                 ''');
 
-                 println("readFile 的读取相对路径信息");
+                 println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
                  def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
                 println("readFile 的读取相对路径信息"+text);
 
-               println("readFile 的读取绝对路径地址");
+               println("readFile 的读取绝对路径地址=/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml");
                def text2 =  readFile(encoding: 'UTF-8', file: '/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml');
                 println("readFile 的读取绝对路径地址"+text2);
            }
