@@ -91,7 +91,7 @@ timestamps{
                 //执行sh的script脚本
                 def mvnpath;
                if(isUnix()){
-                 mvnpath = "${mavenResult}/bin/mvn -l mvnlog.log"
+                 mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
                }
                def status = sh(returnStatus: true,
                      script: mvnpath
