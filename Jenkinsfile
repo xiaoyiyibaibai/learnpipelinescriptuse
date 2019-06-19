@@ -3,6 +3,10 @@ timestamps{
     // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
      //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
         // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
+
+        def username = 'Jenkins'
+        echo 'Hello Mr. ${username}'
+        echo "I said, Hello Mr. ${username}";
         node {
           stage('prepare') {
           withEnv(['MYName=xiaodonghong']) {
@@ -75,7 +79,11 @@ timestamps{
                 println("Test stage");
             }
             stage('Deploy') {
-                 println("Deploy stage");
+          // 必须有此条件，才可以部署
+               if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        println("Deploy stage");
+                  }
+
             }
         }
     }
