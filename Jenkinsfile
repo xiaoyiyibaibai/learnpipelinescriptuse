@@ -6,6 +6,13 @@ timestamps{
         node {
 
           stage('prepare') {
+
+          withEnv(['MYName=xiaodonghong']) {
+              println("我设置了环境变量--MYName=xiaodonghong");
+          }
+
+          println("自定义的环境变量是${env.MYName}")
+
            // 输出参数信息 println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
           //  mail(
