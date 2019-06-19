@@ -11,9 +11,9 @@ timestamps{
 
           println("自定义的环境变量是${env.MYName}")
           println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
-           withEnv(['XIAODONGHONG_TEST=xiaodonghong']) {
-                        println("我设置了环境变量--XIAODONGHONG_TEST=xiaodonghong");
-           }
+            withEnv(['XIAODONGHONG_TEST=肖东红']) {
+                // some block
+            }
           println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
            // 输出参数信息 println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
