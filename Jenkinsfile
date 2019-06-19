@@ -20,10 +20,13 @@ timestamps{
                println("checkout scm");
               // 导出git的代码
                checkout(scm);
-
+               println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
+               archiveArtifacts('pom.xml,Jenkinsfile');
+               println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
            }
             stage('Build') {
-                println("build stage");
+
+                println("build stage"+);
             }
             stage('Test') {
                 println("Test stage");
