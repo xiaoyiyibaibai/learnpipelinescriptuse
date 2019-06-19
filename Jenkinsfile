@@ -20,15 +20,19 @@ timestamps{
                println("error 标记-start");
                 // 遇到次标记，抛出异常，不再进行下面的操作。error('错误信息');
                println("error 标记-end");
-               def flag = fileExists('test.keystore');
+               def flag = fileExists('writeFile.txt');
                if(flag){
-                 println("fileExists('test.keystore') true");
+                 println("fileExists('writeFile.txt') true");
                }else{
-                  println("fileExists('test.keystore') false");
+                  println("fileExists('writeFile.txt') false");
                }
-                println("将要沉睡12秒");
-               Thread.sleep(12000);
-                println("12秒后，睡醒了");
+                println("将要沉睡2秒");
+               Thread.sleep(2000);
+                println("2秒后，睡醒了，写入文件writeFile.txt");
+                // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
+                writeFile(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
+                ''');
+
            }
            stage('checkout') {
                println("checkout scm");
