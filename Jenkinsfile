@@ -14,7 +14,7 @@ timestamps{
           //     );
            // 准备阶段1.先判断上一个构建是否完成
              def  content = "列举一些全局变量--";
-             content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME;
+             content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
             emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
             println("prepare stage");
            }
