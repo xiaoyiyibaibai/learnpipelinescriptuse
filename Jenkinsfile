@@ -33,6 +33,9 @@ timestamps{
                 writeFile(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
                 ''');
 
+                 println("readFile 的读取");
+                 def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
+                println("readFile 的读取"+text);
            }
            stage('checkout') {
                println("checkout scm");
