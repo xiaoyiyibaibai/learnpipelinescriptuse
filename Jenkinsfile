@@ -26,7 +26,7 @@ timestamps{
            }
             stage('Build') {
 
-                println("build stage"+);
+                println("build stage");
             }
             stage('Test') {
                 println("Test stage");
