@@ -6,7 +6,8 @@ timestamps{
           stage('prepare') {
             // 发送邮件
            mail(
-                subject:"我要发邮件了",
+                from: "a250604@sina.com",
+                subject: "我要发邮件了",
                 cc:"xiaodonghong@gsafety.com",
                 to:"xiaodonghong@gsafety",
                 body:"我是content"
