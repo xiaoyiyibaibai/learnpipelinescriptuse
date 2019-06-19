@@ -86,8 +86,13 @@ timestamps{
             stage('Build') {
                println("build stage-使用maven进行打包");
                  // 使用maven进行打包
-                def toolresult =tool(name: 'maven', type: 'maven');
-                println("tools results ="+toolresult);
+                def mavenResult =tool(name: 'maven', type: 'maven');
+                 println("mavenResult results ="+mavenResult);
+                //执行sh的script脚本
+
+                // jdk的路径
+                def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
+                println("jdkResult results ="+jdkResult);
                 println("build stage");
             }
 
