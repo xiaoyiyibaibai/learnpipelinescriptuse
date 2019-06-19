@@ -5,7 +5,13 @@ timestamps{
 
           stage('prepare') {
             // 发送邮件
-             sendMail(subject:"我要发邮件了",cc:"xiaodonghong@gsafety.com",to:"xiaodonghong@gsafety",content:"我是content",);
+           mail(
+               from: 'a250604@sina.com',
+                subject:"我要发邮件了",
+                cc:"xiaodonghong@gsafety.com",
+                to:"xiaodonghong@gsafety",
+                content:"我是content"
+              );
            // 准备阶段1.先判断上一个构建是否完成
 
             println("prepare stage");
@@ -31,14 +37,4 @@ timestamps{
      println("异常信息="+e.getMessage());
     }
 
-}
-  def sendMail(subject,cc,to,content){
-              mail(
-                  bcc: '',
-                  body: content,
-                  cc: cc,
-                  from: 'a250604@sina.com',
-                  subject: subject,
-                  to: to
-              );
 }
