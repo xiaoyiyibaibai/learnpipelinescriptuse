@@ -2,6 +2,12 @@ timestamps{
     try{
         // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
         node {
+          stage('prepare') {
+            println("prepare stage");
+           }
+           stage('checkout') {
+               println("checkout scm");
+           }
             stage('Build') {
                 println("build stage");
             }
