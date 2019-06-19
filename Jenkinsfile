@@ -1,9 +1,12 @@
 timestamps{
     try{
+    // 定义参数
+       properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
         // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
         node {
 
           stage('prepare') {
+             println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
           //  mail(
         //         from: 'a250604@sina.com',
@@ -51,7 +54,6 @@ timestamps{
               }else{
                  println("fileExists('test.keystore') false");
               }
- junit '**/target/*.xml'
                println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
                archiveArtifacts('pom.xml,Jenkinsfile');
                println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
