@@ -26,7 +26,9 @@ timestamps{
                }else{
                   println("fileExists('test.keystore') false");
                }
-
+                println("将要沉睡12秒");
+               Thread.sleep(12000);
+                println("12秒后，睡醒了");
            }
            stage('checkout') {
                println("checkout scm");
