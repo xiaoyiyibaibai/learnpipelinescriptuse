@@ -89,6 +89,14 @@ timestamps{
                 def mavenResult =tool(name: 'maven', type: 'maven');
                  println("mavenResult results ="+mavenResult);
                 //执行sh的script脚本
+                def mvnpath;
+               if(isUnix()){
+                 mvnpath = "${mavenResult}/bin/mvn -l mvnlog.log"
+               }
+               def status = sh(returnStatus: true,
+                     script: mvnpath
+                     );
+                 println("status="+status);
 
                 // jdk的路径
                 def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
