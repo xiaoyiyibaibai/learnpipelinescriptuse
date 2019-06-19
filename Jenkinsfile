@@ -1,12 +1,12 @@
 timestamps{
     try{
-    // 定义参数
-       properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
+    // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
+     //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
         // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
         node {
 
           stage('prepare') {
-             println("输出参数--${params.Greeting}");
+           // 输出参数信息 println("输出参数--${params.Greeting}");
             // 发送邮件报250 ok queue id 不知如何解决
           //  mail(
         //         from: 'a250604@sina.com',
