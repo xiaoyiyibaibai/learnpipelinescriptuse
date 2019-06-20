@@ -19,16 +19,16 @@ timestamps{
                   }
 
                 }
-                  println("（evn方式获取）下面我设置了环境变量--MYName=xiaodonghong${env.MYName}"+);
-                   println("（${MYName}方式获取）下面我设置了环境变量--MYName=xiaodonghon${MYName}"+);
+                  println("（evn方式获取）下面我设置了环境变量--MYName=xiaodonghong${env.MYName}");
+                   println("（${MYName}方式获取）下面我设置了环境变量--MYName=xiaodonghon${MYName}");
                 // 该变量是局部变量
                   withEnv(['MYName=xiaodonghong']) {
-                       println("（evn方式获取）局部变量块我设置了环境变量--MYName=xiaodonghong${env.MYName}"+);
-                       println("（${MYName}方式获取）局部变量块我设置了环境变量--MYName=xiaodonghon${MYName}"+);
+                       println("（evn方式获取）局部变量块我设置了环境变量--MYName=xiaodonghong${env.MYName}");
+                       println("（${MYName}方式获取）局部变量块我设置了环境变量--MYName=xiaodonghon${MYName}");
                   }
 
-                println("（evn方式获取）局部变量块后我获取环境变量--MYName=xiaodonghong${env.MYName}"+);
-                println("（${MYName}方式获取）局部变量块后我获取了环境变量--MYName=xiaodonghon${MYName}"+);
+                println("（evn方式获取）局部变量块后我获取环境变量--MYName=xiaodonghong${env.MYName}");
+                println("（${MYName}方式获取）局部变量块后我获取了环境变量--MYName=xiaodonghon${MYName}");
                 println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
                withEnv(['XIAODONGHONG_TEST=肖东红']) {
                     println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
