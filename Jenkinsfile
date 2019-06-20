@@ -144,6 +144,7 @@ timestamps{
     }
     catch(e){
      println("异常信息="+e.getMessage());
+     error('错误信息'+e.getMessage());
     }finally {
              if (currentBuild.result == 'UNSTABLE') {
                  echo 'I am unstable :/'
