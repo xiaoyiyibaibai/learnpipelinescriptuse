@@ -101,7 +101,7 @@ import hudson.model.*;
                          println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
                       }
 
-                       def yamlfiles = firstObj.find_files(glob: '**/*.yaml')
+                       def yamlfiles = firstObj.find_files('**/*.yaml')
                        println("输出files信息="+yamlfiles);
 
                           // 直接获取
