@@ -19,11 +19,10 @@ timestamps{
                   }
 
                 }
-                  withEnv(['MYName=xiaodonghong']) {
-                                    println("代码块中env.MYName自定义的环境变量是${env.MYName}")
-                                     println("代码块中MYName自定义的环境变量是${MYName}")
-                  }
-
+              withEnv(['MYName=xiaodonghong']) {
+                                println("代码块中env.MYName自定义的环境变量是${env.MYName}")
+                                 println("代码块中MYName自定义的环境变量是${MYName}")
+              }
               println("代码块中后env.MYName自定义的环境变量是${env.MYName}")
               println("代码块中后MYName自定义的环境变量是${MYName}")
               println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
