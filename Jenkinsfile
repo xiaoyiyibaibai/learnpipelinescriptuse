@@ -1,4 +1,4 @@
-node{
+
     timestamps{
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
@@ -8,7 +8,7 @@ node{
             def username = 'Jenkins'
             echo 'Hello Mr. ${username}'
             echo "I said, Hello Mr. ${username}";
-            node(){
+            node{
               stage('prepare') {
                  if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                       if(currentBuild.nextBuild){
@@ -139,7 +139,7 @@ node{
             }
         }
         catch(e){
-           error('错误信息'+e.getMessage());
+           println('错误信息'+e.getMessage());
         }finally {
                  if (currentBuild.result == 'UNSTABLE') {
                      echo 'I am unstable :/'
@@ -149,4 +149,3 @@ node{
              }
 
     }
-}
