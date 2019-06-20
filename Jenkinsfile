@@ -11,20 +11,7 @@
             node{
               stage("parall"){
                echo "并发处理开始";
-                   parallel (
-                          'mac':  {
-                              echo '並列処理1'
-                          },
-                          'linux':  {
-                  Thread.sleep(2000);
-                              echo '並列処理2'
 
-                          },
-                          'win':  {
-                              echo '並列処理3'
-                          }
-                  )
-                echo "并发处理结束";
               }
 
 
