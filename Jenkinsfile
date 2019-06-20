@@ -107,7 +107,7 @@ import hudson.model.*;
                           // 直接获取
                         def tempfile= yamlfiles[0];
                         println("tempfile="+tempfile);
-                       def yamls = firstObj.read_yaml_file (file: tempfile);
+                       def yamls = firstObj.read_yaml_file (tempfile);
                        println("yamls=" + yamls);
 
                      // 使用maven进行打包
