@@ -91,13 +91,11 @@
                      def yamlfiles = findFiles(glob: '**/*.yaml')
                       println("输出files信息="+yamlfiles);
 
-                     if(yamlfiles!=null&&yamlfiles.size()>0){
+
                            def tempfile= yamlfiles.getAt(new Integer(1));
                              println("tempfile="+tempfile);
                             def yamls = readYaml (file: tempfile);
                             println("yamls=" + yamls);
-
-                     }
 
 
 
