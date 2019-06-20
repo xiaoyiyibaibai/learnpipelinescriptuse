@@ -88,6 +88,19 @@
                          println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
                       }
 
+                     def yamlfiles = findFiles(glob: '**/*.yaml')
+                      println("输出files信息="+files);
+
+                     if(yamlfiles!=null&&yamlfiles.size()>0){
+                           def tempfile= yamlfiles.get(0);
+                             println("tempfile="+tempfile);
+                            def yamls = readYaml (file: tempfile);
+                            println("yamls" = yamls);
+
+                     }
+
+
+
                      // 使用maven进行打包
                     def mavenResult =tool(name: 'maven', type: 'maven');
                      println("mavenResult results ="+mavenResult);
