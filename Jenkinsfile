@@ -15,7 +15,7 @@ import hudson.model.*;
              def workspace =  env.WORKSPACE;
              def baseGroovyFilePath = workspace+"/jenkinsmodules/files/modules/";
              println("baseGroovyFilePath = "+baseGroovyFilePath);
-
+               def firstObj ;
 
               stage("parall"){
 
@@ -82,7 +82,7 @@ import hudson.model.*;
                    archiveArtifacts('pom.xml,Jenkinsfile');
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
                    // 已经将源代码导出到workspace中，使用load加载文件是
-                   def firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
+                   firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
                    firstObj.echo_msg(baseGroovyFilePath);
 
 
@@ -101,17 +101,14 @@ import hudson.model.*;
                          println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
                       }
 
-                     def yamlfiles = findFiles(glob: '**/*.yaml')
-                      println("输出files信息="+yamlfiles);
+                       def yamlfiles = firstObj.find_files(glob: '**/*.yaml')
+                       println("输出files信息="+yamlfiles);
 
-
-// 直接获取
-                           def tempfile= yamlfiles[0];
-                             println("tempfile="+tempfile);
-                            def yamls = readYaml (file: tempfile);
-                            println("yamls=" + yamls);
-
-
+                          // 直接获取
+                        def tempfile= yamlfiles[0];
+                        println("tempfile="+tempfile);
+                       def yamls = firstObj.read_yaml_file (file: tempfile);
+                       println("yamls=" + yamls);
 
                      // 使用maven进行打包
                     def mavenResult =tool(name: 'maven', type: 'maven');
