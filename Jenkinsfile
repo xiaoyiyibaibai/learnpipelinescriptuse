@@ -1,4 +1,4 @@
-import  hudson.model.*;
+import hudson.model.*;
     timestamps{
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
@@ -10,6 +10,14 @@ import  hudson.model.*;
             echo "I said, Hello Mr. ${username}";
             echo "WORKSPACE Mr. ${env.WORKSPACE}";
             node{
+
+           // 进入node之后就有了workspace 具有了项目信息
+             def workspace =  env.WORKSPACE;
+             def baseGroovyFilePath = workspace+"/jenkinsmodules/files/modules/";
+             println("baseGroovyFilePath = "+baseGroovyFilePath);
+             def firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
+             firstObj.echo_msg(baseGroovyFilePath);
+
               stage("parall"){
 
                echo "并发处理开始";
@@ -74,6 +82,9 @@ import  hudson.model.*;
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
                    archiveArtifacts('pom.xml,Jenkinsfile');
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
+
+
+
                }
 
 
