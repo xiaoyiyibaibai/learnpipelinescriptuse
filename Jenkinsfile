@@ -20,10 +20,12 @@ timestamps{
 
                 }
                   withEnv(['MYName=xiaodonghong']) {
-                      println("我设置了环境变量--MYName=xiaodonghong");
+                                    println("代码块中env.MYName自定义的环境变量是${env.MYName}")
+                                     println("代码块中MYName自定义的环境变量是${MYName}")
                   }
 
-              println("自定义的环境变量是${env.MYName}")
+              println("代码块中后env.MYName自定义的环境变量是${env.MYName}")
+              println("代码块中后MYName自定义的环境变量是${MYName}")
               println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
                withEnv(['XIAODONGHONG_TEST=肖东红']) {
                     println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
@@ -111,7 +113,12 @@ timestamps{
 
 
             stage('Test') {
-                def inputStr = input('请输入信息');
+                def inputStr = input(
+                            message: '请输入信息',
+                            ok: '确认',
+                            parameters:
+                            [string(defaultValue: '肖东红', description: '输入你的名字', name: 'username', trim: false),
+                            text(defaultValue: '我爱你小人', description: '请输入描述信息', name: '描述')]);
                 println("输入信息："+inputStr);
                 println("单元测试 stage");
             }
