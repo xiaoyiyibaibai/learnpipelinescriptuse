@@ -9,6 +9,14 @@ timestamps{
         echo "I said, Hello Mr. ${username}";
         node {
           stage('prepare') {
+               def quick_test = "true";
+                when {
+                          expression {
+                             return  (quick_test == “true” )
+                          }
+                    }
+
+
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
