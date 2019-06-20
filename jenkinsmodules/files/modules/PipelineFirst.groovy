@@ -30,7 +30,7 @@ def read_json_file2(json_string) {
 
 def read_yaml_file(file_path) {
     echo "read_yaml_file";
-    def propMap = readYaml file : file_path
+    def propMap = readYaml(file : file_path);
     propMap.each {
         println ( it.key + " = " + it.value )
     }
