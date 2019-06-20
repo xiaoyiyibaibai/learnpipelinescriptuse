@@ -67,7 +67,7 @@
                     ''');
 
                      println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
-                     def text =  readFile(encoding: 'UTF-8', file: './src/main/resources/application.yaml');
+                     def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
                     println("readFile 的读取相对路径信息"+text);
 
                    println("readFile 的读取绝对路径地址=/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml");
