@@ -92,7 +92,7 @@
                       println("输出files信息="+yamlfiles);
 
                      if(yamlfiles!=null&&yamlfiles.size()>0){
-                           def tempfile= yamlfiles.get(0);
+                           def tempfile= yamlfiles.getAt(0);
                              println("tempfile="+tempfile);
                             def yamls = readYaml (file: tempfile);
                             println("yamls=" + yamls);
