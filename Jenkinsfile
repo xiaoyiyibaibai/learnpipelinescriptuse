@@ -11,12 +11,11 @@ import hudson.model.*;
             echo "WORKSPACE Mr. ${env.WORKSPACE}";
             node{
 
-           // 进入node之后就有了workspace 具有了项目信息
+           // 进入node之后就有了workspace 具有了项目信息,但是没有源代码，所以在此处调用是报错的
              def workspace =  env.WORKSPACE;
              def baseGroovyFilePath = workspace+"/jenkinsmodules/files/modules/";
              println("baseGroovyFilePath = "+baseGroovyFilePath);
-             def firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
-             firstObj.echo_msg(baseGroovyFilePath);
+
 
               stage("parall"){
 
@@ -82,7 +81,9 @@ import hudson.model.*;
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
                    archiveArtifacts('pom.xml,Jenkinsfile');
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
-
+                   // 已经将源代码导出到workspace中，使用load加载文件是
+                   def firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
+                   firstObj.echo_msg(baseGroovyFilePath);
 
 
                }
