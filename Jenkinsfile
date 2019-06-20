@@ -9,10 +9,17 @@
             echo 'Hello Mr. ${username}'
             echo "I said, Hello Mr. ${username}";
             node{
-                  stage("parall"){
-                   echo "并发处理开始";
+              stage("parall"){
 
-                  }
+               echo "并发处理开始";
+
+              }
+            stage("Utility Steps method"){
+
+             def files = findFiles(glob: '**/*.log')
+              println("输出files信息="+files);
+
+            }
 
               stage('prepare') {
                  if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
