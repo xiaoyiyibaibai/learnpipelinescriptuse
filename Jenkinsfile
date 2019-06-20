@@ -29,8 +29,7 @@ timestamps{
 
                     println("代码块后env.MYName自定义的环境变量是: ${env.MYName}")
                     println("代码块后MYName自定义的环境变量是: ${MYName}")
-                    println("代码块后env.LIMEI自定义的环境变量是: ${env.LIMEI}")
-                    println("代码块后LIMEI自定义的环境变量是: ${LIMEI}")
+
                     println("代码块后env.LIMEI2自定义的环境变量是: ${env.LIMEI2}")
                     println("代码块后LIMEI2自定义的环境变量是: ${LIMEI2}")
               println("系统配置中的环境变量XIAODONGHONG_TEST的是: ${env.XIAODONGHONG_TEST}")
