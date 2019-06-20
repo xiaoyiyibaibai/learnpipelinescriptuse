@@ -95,7 +95,7 @@
                            def tempfile= yamlfiles.get(0);
                              println("tempfile="+tempfile);
                             def yamls = readYaml (file: tempfile);
-                            println("yamls" = yamls);
+                            println("yamls=" + yamls);
 
                      }
 
