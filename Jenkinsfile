@@ -16,7 +16,6 @@ timestamps{
                           }
                     }
 
-
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
