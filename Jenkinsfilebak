@@ -9,10 +9,11 @@
             echo 'Hello Mr. ${username}'
             echo "I said, Hello Mr. ${username}";
             node{
-                  stage("parall"){
-                   echo "并发处理开始";
+              stage("parall"){
+               echo "并发处理开始";
 
-                  }
+              }
+
 
               stage('prepare') {
                  if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
@@ -25,33 +26,60 @@
                       }
 
                     }
+
+                      withEnv(['MYNAME=xiaodonghong','PATH+LIMEI2=/我是特殊信息2']) {
+                                println("代码块中env.MYName自定义的环境变量是: ${env.MYName}")
+                                println("代码块中MYName自定义的环境变量是: ${MYName}")
+                      }
+                        withEnv(["PATH+LIMEI2=我是特殊信息2"]) {
+                                  println("代码块中env.LIMEI2自定义的环境变量是: ${env.LIMEI2}")
+
+                          }
+                        println("代码块后env.MYName自定义的环境变量是: ${env.MYName}")
+                        println("代码块后env.LIMEI2自定义的环境变量是: ${env.LIMEI2}")
                   println("系统配置中的环境变量XIAODONGHONG_TEST的是: ${env.XIAODONGHONG_TEST}")
                    withEnv(['XIAODONGHONG_TEST=肖东红']) {
                         println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
                     }
                  println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
+               // 输出参数信息 println("输出参数--${params.Greeting}");
+                // 发送邮件报250 ok queue id 不知如何解决
+              //  mail(
+            //         from: 'a250604@sina.com',
+             //        subject: '我要发邮件了',
+              //       cc: 'xiaodonghong@gsafety.com',
+             //        to: 'xiaodonghong@gsafety',
+              //       body: '我是content'
+              //     );
                // 准备阶段1.先判断上一个构建是否完成
                    def  content = "列举一些全局变量--";
                    content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
                    emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
                     println("prepare stage");
+                   println("error 标记-start");
+                    // 遇到次标记，抛出异常，不再进行下面的操作。error('错误信息');
+                   println("error 标记-end");
                    def flag = fileExists('writeFile.txt');
                    if(flag){
                      println("fileExists('writeFile.txt') true");
                    }else{
                       println("fileExists('writeFile.txt') false");
                    }
+                    println("将要沉睡2秒");
+                   Thread.sleep(2000);
                     println("2秒后，睡醒了，写入文件writeFile.txt");
                     // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
                     writeFile(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
                     ''');
+
                      println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
                      def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
                     println("readFile 的读取相对路径信息"+text);
 
-
+                   println("readFile 的读取绝对路径地址=/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml");
+                   def text2 =  readFile(encoding: 'UTF-8', file: '/opt/yunweibyxdh/data/jenkinsdata/workspace/springboot2test_develop/src/main/resources/application.yaml');
+                   println("readFile 的读取绝对路径地址"+text2);
                }
-
                stage('checkout') {
                    println("checkout scm");
                   // 导出git的代码
