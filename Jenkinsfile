@@ -105,7 +105,8 @@ import hudson.model.*;
                       println("输出files信息="+yamlfiles);
 
 
-                           def tempfile= yamlfiles.getAt(1);
+// 直接获取
+                           def tempfile= yamlfiles[0];
                              println("tempfile="+tempfile);
                             def yamls = readYaml (file: tempfile);
                             println("yamls=" + yamls);
