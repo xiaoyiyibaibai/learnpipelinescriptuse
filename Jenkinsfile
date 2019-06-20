@@ -111,6 +111,8 @@ timestamps{
 
 
             stage('Test') {
+                def inputStr = input('请输入信息');
+                println("输入信息："+inputStr);
                 println("单元测试 stage");
             }
 
