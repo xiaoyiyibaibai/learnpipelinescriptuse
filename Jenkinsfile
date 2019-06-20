@@ -107,8 +107,8 @@ import hudson.model.*;
                           // 直接获取
                         def tempfile= yamlfiles[0];
                         println("tempfile="+tempfile);
-                       def yamls = firstObj.read_yaml_file(tempfile);
-                       println("yamls=" + yamls);
+                       def jsons = firstObj.read_json_file("test_json.json");
+                       println("jsons=" + jsons);
 
                      // 使用maven进行打包
                     def mavenResult =tool(name: 'maven', type: 'maven');

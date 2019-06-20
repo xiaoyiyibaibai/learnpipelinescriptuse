@@ -1,4 +1,5 @@
 import hudson.model.*;
+import groovy.json.*;
 
 def echo_msg(msg){
     println("在groovy脚本中输出信息="+msg);
@@ -15,6 +16,7 @@ def find_files(filetype) {
 
 def read_json_file(file_path) {
     echo "read_json_file";
+    def jsonOutput = new JsonOutput();
     def propMap = readJSON file : file_path
     propMap.each {
         println ( it.key + " = " + it.value )
