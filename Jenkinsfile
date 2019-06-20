@@ -8,6 +8,7 @@
             def username = 'Jenkins'
             echo 'Hello Mr. ${username}'
             echo "I said, Hello Mr. ${username}";
+            echo "WORKSPACE Mr. ${env.WORKSPACE}";
             node{
               stage("parall"){
 
