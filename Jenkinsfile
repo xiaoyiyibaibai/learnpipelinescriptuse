@@ -1,4 +1,4 @@
-
+import  hudson.model.*;
     timestamps{
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
