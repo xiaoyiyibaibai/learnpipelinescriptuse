@@ -17,8 +17,8 @@
               }
             stage("Utility Steps method"){
 
-             def files = findFiles(glob: '**/*.log')
-              println("输出files信息="+files);
+                def files = findFiles(glob: '**/*.log')
+                println("输出files信息="+files);
 
 
             }
