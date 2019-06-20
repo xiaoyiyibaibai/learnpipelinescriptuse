@@ -19,6 +19,7 @@
              def files = findFiles(glob: '**/*.log')
               println("输出files信息="+files);
 
+
             }
 
               stage('prepare') {
@@ -77,6 +78,16 @@
 
                 stage('Build') {
                    println("build stage-使用maven进行打包");
+                   // 判断pom.xml文件是否存在
+
+                    def pomeflag = fileExists('writeFile.txt');
+                      if(pomeflag){
+                        def pomfile = readMavenPom(file: 'pom.xml');
+                        println("readMavenPom(file: 'pom.xml') true"+pomfile);
+                      }else{
+                         println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
+                      }
+
                      // 使用maven进行打包
                     def mavenResult =tool(name: 'maven', type: 'maven');
                      println("mavenResult results ="+mavenResult);
