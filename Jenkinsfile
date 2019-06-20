@@ -19,12 +19,17 @@ timestamps{
                   }
 
                 }
+                  println("（evn方式获取）下面我设置了环境变量--MYName=xiaodonghong${env.MYName}"+);
+                   println("（${MYName}方式获取）下面我设置了环境变量--MYName=xiaodonghon${MYName}"+);
+                // 该变量是局部变量
                   withEnv(['MYName=xiaodonghong']) {
-                      println("我设置了环境变量--MYName=xiaodonghong");
+                       println("（evn方式获取）局部变量块我设置了环境变量--MYName=xiaodonghong${env.MYName}"+);
+                       println("（${MYName}方式获取）局部变量块我设置了环境变量--MYName=xiaodonghon${MYName}"+);
                   }
 
-              println("自定义的环境变量是${env.MYName}")
-              println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
+                println("（evn方式获取）局部变量块后我获取环境变量--MYName=xiaodonghong${env.MYName}"+);
+                println("（${MYName}方式获取）局部变量块后我获取了环境变量--MYName=xiaodonghon${MYName}"+);
+                println("系统配置中的环境变量XIAODONGHONG_TEST的是${env.XIAODONGHONG_TEST}")
                withEnv(['XIAODONGHONG_TEST=肖东红']) {
                     println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
                 }
@@ -84,22 +89,29 @@ timestamps{
 
 
             stage('Build') {
-               println("build stage-使用maven进行打包");
-                 // 使用maven进行打包
-                def mavenResult =tool(name: 'maven', type: 'maven');
-                 println("mavenResult results ="+mavenResult);
-                //执行sh的script脚本
-                def mvnpath;
-               if(isUnix()){
-                 mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
-               }
-               def status = sh(returnStatus: true,
-                     script: mvnpath
-                     );
+                   println("build stage-使用maven进行打包");
+                     // 使用maven进行打包
+                    def mavenResult =tool(name: 'maven', type: 'maven');
+                     println("mavenResult results ="+mavenResult);
+                    //执行sh的script脚本
+                    def mvnpath;
 
-                 println("status="+status);
-                if(status>0){
-                  println("mvn package 执行失败！"+status);
+                   if(isUnix()){
+                     mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
+                   }
+
+                   def status = sh(returnStatus: true,
+                         script: mvnpath
+                    \);
+
+                    println("status="+status);
+
+                    if(status>0){
+                      println("mvn package 执行失败！"+status);
+                     println("error 标记-start");
+                      error('mvn package 执行失败！');
+                     println("error 标记-end");
+
                 }
 
 
