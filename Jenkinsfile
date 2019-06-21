@@ -157,9 +157,8 @@ import hudson.model.*;
                   basicStep = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
                   basicStep.echo_msg2();
                 }
-            }
-        }
-        catch(e){
+
+        }catch(e){
            println('错误信息'+e.getMessage());
         }finally {
                //做完了所有的step之后，将workspace删除
@@ -170,5 +169,5 @@ import hudson.model.*;
                      echo 'One way or another, I have finished'
                  }
              }
-
+     }
     }
