@@ -21,8 +21,7 @@ import hudson.model.*;
                        count= count+1;
                             println "here we are test retry fuction"
                             sleep 65
-                       }
-                 }
+              }
 
           echo "执行尝试的代码end"+count;
 
