@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DemoTest {
 
     @Test
-    public void contextLoads() {
+    public void testSysout() {
         System.out.println("我是第一个单元测试类！");
     }
 
