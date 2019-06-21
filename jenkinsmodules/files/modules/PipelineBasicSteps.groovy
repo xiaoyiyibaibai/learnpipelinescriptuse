@@ -1,5 +1,5 @@
 
-def deleteDir(){
+def delete_Dir(){
     echo "执行PipelineBasicSteps的deleteDir方法";
     def  lsresult =sh("ls -al ${env.WORKSPACE}");
     println("ls -al ${env.WORKSPACE} result=" )
