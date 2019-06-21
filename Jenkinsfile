@@ -28,7 +28,7 @@ import hudson.model.*;
                    }
 
                  }
-
+          echo "执行尝试的代码end"+count;
 
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
