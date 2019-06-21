@@ -99,11 +99,17 @@ timestamps{
                //执行sh的script脚本
                 def mvnpath;
                 if(isUnix()){
-                   mvnpath = "${mavenResult}/bin/mvn test";
+                   mvnpath = "${mavenResult}/bin/mvn test -l mvntest.log";
                    echo "执行maven的test命令";
                    def status = sh(returnStatus: true,
                          script: mvnpath
                      );
+
+                    if(status==0){
+                       echo "成功，归档mvn test 日志文件";
+                        archiveArtifacts('mvntest.log');
+                    }
+
                  }
 
 
