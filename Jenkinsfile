@@ -142,7 +142,7 @@ timestamps{
 
             stage("常用指令模块"){
 
-                echo "执行尝试的代码";
+                echo "执行代码块执行超时的指令";
                 def count =0;
                 count =0;
                 // 代码块最大执行时间，timeout单位是分，sleep单位是秒
@@ -152,6 +152,7 @@ timestamps{
                             sleep 1
                  }
 
+                echo "执行错误后多次尝试的指令";
                  count =1;
                      //最大尝试执行次数是3
                    retry(2) {
