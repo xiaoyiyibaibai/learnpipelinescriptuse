@@ -3,6 +3,10 @@ import hudson.util.*;
 import hudson.scm.*;
 import java.util.Collections;
 import java.util.Collection;
+import groovy.lang.*;
+
+
+
 def echo_msg2(msg){
     println("在groovy脚本中输出信息="+msg);
 }
@@ -21,6 +25,7 @@ def deletecdir(){
 }
 
 def file_Exists(path){
+
     return  fileExists(path);
 }
 // 将内容写入文件

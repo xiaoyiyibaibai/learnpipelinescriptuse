@@ -1,6 +1,6 @@
 import hudson.model.*;
 import groovy.json.*;
-
+import  groovy.lang.*;
 def echo_msg(msg){
     println("在groovy脚本中输出信息="+msg);
 }
