@@ -39,8 +39,7 @@ import hudson.model.*;
               println("readFile 的读取相对路径信息"+text);
 
 
-               basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-               basicSteps.echo_msg2();
+              basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
               def flag = basicSteps.file_Exists('test.keystore');
               if(flag){
                 println("fileExists('test.keystore') true");
