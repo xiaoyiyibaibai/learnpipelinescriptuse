@@ -24,11 +24,9 @@ import hudson.model.*;
                     Thread.sleep(2000);
                   }
 
-                }
-                 println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
-                 def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
-                println("readFile 的读取相对路径信息"+text);
-           }
+              }
+
+          }
 
            stage('checkout') {
             echo "checkoutin = abc3 = "+abc;
@@ -36,6 +34,11 @@ import hudson.model.*;
             echo "checkout-out = abc3 = "+abc;
               // 导出git的代码
                checkout(scm);
+               println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
+                                def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
+              println("readFile 的读取相对路径信息"+text);
+
+
                basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
                basicSteps.echo_msg2();
               def flag = basicSteps.file_Exists('test.keystore');
