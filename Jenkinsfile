@@ -16,21 +16,6 @@ import hudson.model.*;
           stage('prepare') {
                 echo "执行尝试的代码";
                 def count =0;
-
-                timeout(20){
-                     retry(3) {
-                       count= count+1;
-                       if(count==3){
-                          echo "count==3不再尝试了";
-                       }else{
-                            println "here we are test retry fuction"
-                            sleep 2
-                            echo "2秒之后，再执行，除以0 异常，进入下一次尝试";
-                            println 10/0
-                       }
-
-                     }
-                 }
                 count =0;
                 timeout(2){
                      retry(3) {
