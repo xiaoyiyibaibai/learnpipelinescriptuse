@@ -184,7 +184,7 @@ timestamps{
                 emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
                 basicSteps.write_File( 'writeFile.txt','UTF-8',  '将这些信息写入到writeFile.txt文件中！');
                //做完了所有的step之后，将workspace删除
-                 basicSteps.deletecdir();
+               // 可用，这里调试先不删除  basicSteps.deletecdir();
                  if (currentBuild.result == 'UNSTABLE') {
                      echo 'I am unstable :/'
                  } else {
