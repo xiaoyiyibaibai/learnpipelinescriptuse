@@ -43,33 +43,82 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 	</dependencies>
+
 	<build>
-      <plugins>
-		  <!--执行junit单元测试的插件-->
-		  <plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-surefire-plugin</artifactId>
-			  <configuration>
-				  <includes>
-					  <!--只进行这些类的单元测试ant-style-->
-					  <include>**/*Test.java</include>
-				  </includes>
-				  <excludes>
-					  <!--排除符合include但是不符合该部分的单元测试进行这些类的单元测试-->
-					  <exclude>**/AccountImageUtilTest.java</exclude>
-				  </excludes>
-			  </configuration>
-		  </plugin>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-report-plugin</artifactId>
-              <configuration>
-                  <showSuccess>false</showSuccess>
-              </configuration>
-          </plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<!--设置包含的测试类 -->
+					<includes>
+						<include>******</include>
+						<include>*/User*</include>
+					</includes>
+					<!-- 设置不进行测试类 -->
+					<excludes>
+						<exclude>2Test*</exclude>
+					</excludes>
+					<!-- 跳过测试阶段，測試類写的有问题也会出错，一般不推荐 -->
+					<!--<skip>true</skip> -->
+				</configuration>
+			</plugin>
 
-	  </plugins>
+			<!-- 构建项目站点报告插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0-beta-3</version>
+				<configuration>
+					<!-- 配置站点国际化 -->
+					<locales>zh_CN</locales>
+					<!-- 输出编码 -->
+					<outputEncoding>GBK</outputEncoding>
+				</configuration>
+			</plugin>
 
+			<!-- 项目API doc报告 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
 
+			<!-- 单元测试报告html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.12.2</version>
+				<configuration>
+					<showSuccess>false</showSuccess>
+				</configuration>
+			</plugin>
+
+			<!-- 测试覆盖率的报告 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+				</configuration>
+				<executions>
+					<execution>
+						<id>cobertura-report</id>
+						<goals>
+							<goal>cobertura</goal>
+						</goals>
+						<phase>test</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
 	</build>
+
+
 </project>
