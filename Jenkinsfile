@@ -78,8 +78,7 @@ timestamps{
                  //执行sh的script脚本
                   def mvnpath;
                   if(isUnix()){
-                   //单元测试独立进行，这里跳过单元测试
-                    mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log  -DskipTests"
+                    mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
                    }
                    echo "执行maven的package命令";
                    def status = sh(returnStatus: true,
@@ -106,9 +105,9 @@ timestamps{
                          script: mvnpath
                      );
 
-                       echo "成功，归档mvn test 日志文件";
-                        archiveArtifacts('mvntest.log');
-                    }
+                     echo "status"+status;
+                    echo "成功，归档mvn test 日志文件";
+                    archiveArtifacts('mvntest.log');
                  }
             }
 
