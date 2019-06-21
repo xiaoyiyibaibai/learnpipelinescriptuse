@@ -24,7 +24,7 @@ def file_Exists(path){
     return  fileExists(path);
 }
 // 将内容写入文件
-def write_File(encoding="UTF_8",file,text=""){
+def write_File(file,encoding="UTF_8",text=""){
     writeFile(encoding: encoding, file: file, text: text);
 }
 
