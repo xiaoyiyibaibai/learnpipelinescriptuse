@@ -136,7 +136,7 @@ import hudson.model.*;
                //给人员发邮件
                emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
                 // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
-                basicSteps.write_File( 'writeFile.txt','UTF-8',  '将这些信息写入到writeFile.txt文件中！！ '');
+                basicSteps.write_File( 'writeFile.txt','UTF-8',  '将这些信息写入到writeFile.txt文件中！');
                //做完了所有的step之后，将workspace删除
                   basicSteps.deletecdir();
                  if (currentBuild.result == 'UNSTABLE') {
