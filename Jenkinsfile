@@ -7,14 +7,13 @@ import hudson.model.*;
         echo "WORKSPACE Mr. ${env.WORKSPACE}";
         def basicSteps;
         def firstObj ;
+        // 是全局变量，在stage里面的修改都有效果
+
         def abc = "我是肖东红";
         echo "abc1 = "+abc;
         try{
 
           stage('prepare') {
-            echo "prepare = abc2 = "+abc;
-            abc = "prepare";
-            echo "prepare-out = abc2 = "+abc;
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
@@ -29,9 +28,6 @@ import hudson.model.*;
           }
 
            stage('checkout') {
-            echo "checkoutin = abc3 = "+abc;
-            abc = "checkout";
-            echo "checkout-out = abc3 = "+abc;
               // 导出git的代码
                checkout(scm);
                println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
@@ -56,9 +52,6 @@ import hudson.model.*;
 
 
             stage('Build') {
-                     echo "Build = abc4 = "+abc;
-                     abc = "Build";
-                     echo "Build-out = abc4 = "+abc;
                  println("build stage-使用maven进行打包");
 
                 // 判断pom.xml文件是否存在
@@ -98,9 +91,8 @@ import hudson.model.*;
 
 
             stage('Test') {
-                     echo "Test = abc4 = "+abc;
-                     abc = "Test";
-                     echo "Test-out = abc4 = "+abc;
+              echo "Test = abc4 = "+abc;
+              abc = "Test";
               echo "做单元测试";
 
 
@@ -130,10 +122,10 @@ import hudson.model.*;
                 println("jdkResult results ="+jdkResult);
                 println("build stage");
 
-               def  content = "列举一些全局变量--";
-               content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
+                def  content = "列举一些全局变量--";
+                content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
                //给人员发邮件
-               emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
+                emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
                 // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
                 basicSteps.write_File( 'writeFile.txt','UTF-8',  '将这些信息写入到writeFile.txt文件中！');
                //做完了所有的step之后，将workspace删除
