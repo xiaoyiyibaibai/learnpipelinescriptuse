@@ -43,4 +43,26 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 	</dependencies>
+	<build>
+      <plugins>
+		  <!--执行junit单元测试的插件-->
+		  <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-surefire-plugin</artifactId>
+			  <configuration>
+				  <includes>
+					  <!--只进行这些类的单元测试ant-style-->
+					  <include>**/*Test.java</include>
+				  </includes>
+				  <excludes>
+					  <!--排除符合include但是不符合该部分的单元测试进行这些类的单元测试-->
+					  <exclude>**/AccountImageUtilTest.java</exclude>
+				  </excludes>
+			  </configuration>
+		  </plugin>
+
+	  </plugins>
+
+
+	</build>
 </project>
