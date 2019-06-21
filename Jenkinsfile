@@ -9,6 +9,7 @@ import hudson.model.*;
             echo 'Hello Mr. ${username}'
             echo "I said, Hello Mr. ${username}";
             echo "WORKSPACE Mr. ${env.WORKSPACE}";
+            def basicStep;
             node{
 
            // 进入node之后就有了workspace 具有了项目信息,但是没有源代码，所以在此处调用是报错的
@@ -151,8 +152,9 @@ import hudson.model.*;
               // 必须有此条件，才可以部署
                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                             println("Deploy stage");
-                      }
-
+                     }
+                  basicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
+                  basicStep.deleteDir(baseGroovyFilePath);
                 }
             }
         }
