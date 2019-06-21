@@ -5,7 +5,7 @@ import hudson.model.*;
         echo 'Hello Mr. ${username}'
         echo "I said, Hello Mr. ${username}";
         echo "WORKSPACE Mr. ${env.WORKSPACE}";
-        def basicStep;
+        def basicSteps;
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
          //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
@@ -14,147 +14,136 @@ import hudson.model.*;
              def workspace =  env.WORKSPACE;
              def baseGroovyFilePath = workspace+"/jenkinsmodules/files/modules/";
              println("baseGroovyFilePath = "+baseGroovyFilePath);
-               def firstObj ;
+              def firstObj ;
 
-              stage("parall"){
+          stage("parall"){
 
-               echo "并发处理开始";
+             echo "并发处理开始";
 
-              }
-            stage("Utility Steps method"){
+          }
+
+          stage("Utility Steps method"){
 
                 def files = findFiles(glob: '**/*.log')
                 println("输出files信息="+files);
 
 
+           }
+
+          stage('prepare') {
+             if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
+                  if(currentBuild.nextBuild){
+                    println("skip this build"+currentBuild.id);
+                    return ;
+                  }else{
+                    println("wait previousBuild ");
+                    Thread.sleep(2000);
+                  }
+
+                }
+              println("系统配置中的环境变量XIAODONGHONG_TEST的是: ${env.XIAODONGHONG_TEST}")
+               withEnv(['XIAODONGHONG_TEST=肖东红']) {
+                    println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
+                }
+             println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
+           // 准备阶段1.先判断上一个构建是否完成
+               def  content = "列举一些全局变量--";
+               content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
+               emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
+                println("prepare stage");
+                println("2秒后，睡醒了，写入文件writeFile.txt");
+                // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
+                write_File(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
+                ''');
+                 println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
+                 def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
+                println("readFile 的读取相对路径信息"+text);
+           }
+
+           stage('checkout') {
+              // 导出git的代码
+               checkout(scm);
+               basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
+               basicSteps.echo_msg2();
+              def flag = basicSteps.file_Exists('test.keystore');
+              if(flag){
+                println("fileExists('test.keystore') true");
+              }else{
+                 println("fileExists('test.keystore') false");
+              }
+               println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
+               archiveArtifacts('pom.xml,Jenkinsfile');
+               println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
+               // 已经将源代码导出到workspace中，使用load加载文件是
+               firstObj = load ('jenkinsmodules/files/modules/PipelineUtilitySteps.groovy');
+               firstObj.echo_msg(baseGroovyFilePath);
+           }
+
+
+            stage('Build') {
+               println("build stage-使用maven进行打包");
+               // 判断pom.xml文件是否存在
+
+                def pomeflag = fileExists('writeFile.txt');
+                  if(pomeflag){
+                    def pomfile = readMavenPom(file: 'pom.xml');
+                    println("readMavenPom(file: 'pom.xml') true"+pomfile);
+                  }else{
+                     println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
+                  }
+
+                   def yamlfiles = firstObj.find_files('**/*.yaml')
+                   println("输出files信息="+yamlfiles);
+
+                      // 直接获取
+                    def tempfile= yamlfiles[0];
+                    println("tempfile="+tempfile);
+                   def jsons = firstObj.read_json_file("test_json.json");
+                   println("jsons=" + jsons);
+
+                 // 使用maven进行打包
+                def mavenResult =tool(name: 'maven', type: 'maven');
+                 println("mavenResult results ="+mavenResult);
+                //执行sh的script脚本
+                def mvnpath;
+               if(isUnix()){
+                 mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
+               }
+               def status = sh(returnStatus: true,
+                     script: mvnpath
+                     );
+
+                 println("status="+status);
+                if(status>0){
+                  println("mvn package 执行失败！"+status);
+                }
+
+
+                // jdk的路径
+                def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
+                println("jdkResult results ="+jdkResult);
+                println("build stage");
             }
 
-              stage('prepare') {
-                 if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
-                      if(currentBuild.nextBuild){
-                        println("skip this build"+currentBuild.id);
-                        return ;
-                      }else{
-                        println("wait previousBuild ");
-                        Thread.sleep(2000);
-                      }
 
-                    }
-                  println("系统配置中的环境变量XIAODONGHONG_TEST的是: ${env.XIAODONGHONG_TEST}")
-                   withEnv(['XIAODONGHONG_TEST=肖东红']) {
-                        println("代码快中有变化?XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
-                    }
-                 println("XIAODONGHONG_TEST自定义的环境变量是${env.XIAODONGHONG_TEST}")
-               // 准备阶段1.先判断上一个构建是否完成
-                   def  content = "列举一些全局变量--";
-                   content= content+ "env.BRANCH_NAME = "+ env.BRANCH_NAME +"\n  env.JOB_NAME ="+env.JOB_NAME +";  env.JOB_URL=${env.JOB_URL}";
-                   emailext(body: '我是邮件emailext-阶段prepare stage'+content, subject: 'prepare stage', to: 'xiaodonghong@gsafety.com');
-                    println("prepare stage");
-                   def flag = fileExists('writeFile.txt');
-                   if(flag){
-                     println("fileExists('writeFile.txt') true");
-                   }else{
-                      println("fileExists('writeFile.txt') false");
-                   }
-                    println("2秒后，睡醒了，写入文件writeFile.txt");
-                    // 将text信息写入到文件中，file路径是相对于此项目的workspace中的路径。
-                    writeFile(encoding: 'UTF-8', file: 'writeFile.txt', text: '''将这些信息写入到writeFile.txt文件中！！
-                    ''');
-                     println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
-                     def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
-                    println("readFile 的读取相对路径信息"+text);
+            stage('Test') {
+                def inputStr = input(
+                            message: '请输入信息',
+                            ok: '确认',
+                            parameters:
+                            [string(defaultValue: '肖东红', description: '输入你的名字', name: 'username', trim: false),
+                            text(defaultValue: '我爱你小人', description: '请输入描述信息', name: '描述')]);
+                println("输入信息："+inputStr);
+                println("单元测试 stage");
+            }
 
 
-               }
-
-               stage('checkout') {
-                   println("checkout scm");
-                  // 导出git的代码
-                   checkout(scm);
-                    def flag = fileExists('test.keystore');
-                  if(flag){
-                    println("fileExists('test.keystore') true");
-                  }else{
-                     println("fileExists('test.keystore') false");
-                  }
-                   println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件");
-                   archiveArtifacts('pom.xml,Jenkinsfile');
-                   println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
-                   // 已经将源代码导出到workspace中，使用load加载文件是
-                   firstObj = load ('jenkinsmodules/files/modules/PipelineUtilitySteps.groovy');
-                   firstObj.echo_msg(baseGroovyFilePath);
-
-
-               }
-
-
-                stage('Build') {
-                   println("build stage-使用maven进行打包");
-                   // 判断pom.xml文件是否存在
-
-                    def pomeflag = fileExists('writeFile.txt');
-                      if(pomeflag){
-                        def pomfile = readMavenPom(file: 'pom.xml');
-                        println("readMavenPom(file: 'pom.xml') true"+pomfile);
-                      }else{
-                         println("readMavenPom(file: 'pom.xml')('writeFile.txt') false");
-                      }
-
-                       def yamlfiles = firstObj.find_files('**/*.yaml')
-                       println("输出files信息="+yamlfiles);
-
-                          // 直接获取
-                        def tempfile= yamlfiles[0];
-                        println("tempfile="+tempfile);
-                       def jsons = firstObj.read_json_file("test_json.json");
-                       println("jsons=" + jsons);
-
-                     // 使用maven进行打包
-                    def mavenResult =tool(name: 'maven', type: 'maven');
-                     println("mavenResult results ="+mavenResult);
-                    //执行sh的script脚本
-                    def mvnpath;
-                   if(isUnix()){
-                     mvnpath = "${mavenResult}/bin/mvn package -l mvnlog.log"
-                   }
-                   def status = sh(returnStatus: true,
-                         script: mvnpath
-                         );
-
-                     println("status="+status);
-                    if(status>0){
-                      println("mvn package 执行失败！"+status);
-                    }
-
-
-                    // jdk的路径
-                    def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
-                    println("jdkResult results ="+jdkResult);
-                    println("build stage");
-                }
-
-
-                stage('Test') {
-                    def inputStr = input(
-                                message: '请输入信息',
-                                ok: '确认',
-                                parameters:
-                                [string(defaultValue: '肖东红', description: '输入你的名字', name: 'username', trim: false),
-                                text(defaultValue: '我爱你小人', description: '请输入描述信息', name: '描述')]);
-                    println("输入信息："+inputStr);
-                    println("单元测试 stage");
-                }
-
-
-                stage('Deploy') {
-              // 必须有此条件，才可以部署
-                   if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                            println("Deploy stage");
-                     }
-                     //引入方法成功加载其他的方法
-                  basicStep = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-                  basicStep.echo_msg2();
-                }
+            stage('Deploy') {
+          // 必须有此条件，才可以部署
+               if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        println("Deploy stage");
+                 }
+            }
 
         }catch(e){
            println('错误信息'+e.getMessage());
