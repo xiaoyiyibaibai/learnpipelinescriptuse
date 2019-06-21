@@ -73,7 +73,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0-beta-3</version>
 				<configuration>
 					<!-- 配置站点国际化 -->
 					<locales>zh_CN</locales>
@@ -86,14 +85,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
 			</plugin>
 
 			<!-- 单元测试报告html -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.12.2</version>
 				<configuration>
 					<showSuccess>false</showSuccess>
 				</configuration>
@@ -103,7 +100,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>2.7</version>
 				<configuration>
 					<formats>
 						<format>html</format>
@@ -123,6 +120,5 @@
 
 		</plugins>
 	</build>
-
 
 </project>
