@@ -1,5 +1,5 @@
 import hudson.model.*;
-    timestamps{
+timestamps{
     node{
         def username = 'Jenkins'
         echo 'Hello Mr. ${username}'
@@ -13,7 +13,7 @@ import hudson.model.*;
         echo "abc1 = "+abc;
         try{
 
-          stage('prepare') {
+          stage('准备阶段') {
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
@@ -27,14 +27,12 @@ import hudson.model.*;
 
           }
 
-           stage('checkout') {
+           stage('代码检出') {
               // 导出git的代码
                checkout(scm);
                println("readFile 的读取相对路径信息=src/main/resources/application.yaml");
                                 def text =  readFile(encoding: 'UTF-8', file: 'src/main/resources/application.yaml');
               println("readFile 的读取相对路径信息"+text);
-
-
               basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
               def flag = basicSteps.file_Exists('test.keystore');
               if(flag){
@@ -50,9 +48,10 @@ import hudson.model.*;
            }
 
             stage('代码检查') {
-              echo "Test = abc4 = "+abc;
-              abc = "Test";
-              echo "做单元测试";
+
+              echo "1. sonarqube代码质量检查 ";
+              echo "2.maven项目可以使用findbug插件 ";
+
             }
 
             stage('构建') {
@@ -124,42 +123,31 @@ import hudson.model.*;
 
 
 
-            stage("methostest"){
+            stage("常用指令模块"){
+
                echo "执行尝试的代码";
-                            def count =0;
-                            count =0;
-                            // 代码块最大执行时间，timeout单位是分，sleep单位是秒
-                            timeout(1){
-                                   count= count+1;
-                                        println "here we are test retry fuction"
-                                        sleep 1
-                          }
-                                 count =1;
-                                 //最大尝试执行次数是3
-                                   retry(2) {
-                                     count= count+1;
-                                     if(count==2){
-                                       echo "count==2不再尝试了";
-                                     }else{
-                                          println "here we are test retry fuction"
-                                          sleep 2
-                                          echo "2秒之后，再执行，除以0 异常，进入下一次尝试";
-                                          println 10/0
-                                     }
+                def count =0;
+                count =0;
+                // 代码块最大执行时间，timeout单位是分，sleep单位是秒
+                timeout(1){
+                       count= count+1;
+                            println "here we are test retry fuction"
+                            sleep 1
+                 }
 
-                                   }
-
-
-                          def demo_string = "你好 Anthony"
-                          out1 = demo_string.split()
-                          out2 = demo_string.tokenize()
-                          println out1
-                          println out2
-                          boolean b1 = out1 instanceof String[]
-                          boolean b2 = out2 instanceof List
-                          println b1
-                          println b2
-
+                 count =1;
+                     //最大尝试执行次数是3
+                   retry(2) {
+                         count= count+1;
+                         if(count==2){
+                           echo "count==2不再尝试了";
+                         }else{
+                              println "here we are test retry fuction"
+                              sleep 2
+                              echo "2秒之后，再执行，除以0 异常，进入下一次尝试";
+                              println 10/0
+                         }
+                   }
 
             }
 
@@ -186,4 +174,4 @@ import hudson.model.*;
                  }
              }
      }
-    }
+  }
