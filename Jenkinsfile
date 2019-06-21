@@ -1,17 +1,15 @@
 import hudson.model.*;
     timestamps{
     node{
+        def username = 'Jenkins'
+        echo 'Hello Mr. ${username}'
+        echo "I said, Hello Mr. ${username}";
+        echo "WORKSPACE Mr. ${env.WORKSPACE}";
+        def basicStep;
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
          //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
             // 使用jenkinsScripted Pipeline 可以在里面的任何位置使用groovy语法
-
-            def username = 'Jenkins'
-            echo 'Hello Mr. ${username}'
-            echo "I said, Hello Mr. ${username}";
-            echo "WORKSPACE Mr. ${env.WORKSPACE}";
-            def basicStep;
-
            // 进入node之后就有了workspace 具有了项目信息,但是没有源代码，所以在此处调用是报错的
              def workspace =  env.WORKSPACE;
              def baseGroovyFilePath = workspace+"/jenkinsmodules/files/modules/";
