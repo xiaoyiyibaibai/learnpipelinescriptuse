@@ -93,9 +93,20 @@ timestamps{
             }
 
             stage('单元测试') {
-              echo "Test = abc4 = "+abc;
-              abc = "Test";
-              echo "做单元测试";
+                echo "做单元测试";
+                def mavenResult =tool(name: 'maven', type: 'maven');
+                println("maven的工具信息="+mavenResult);
+               //执行sh的script脚本
+                def mvnpath;
+                if(isUnix()){
+                   mvnpath = "${mavenResult}/bin/mvn test";
+                   echo "执行maven的test命令";
+                   def status = sh(returnStatus: true,
+                         script: mvnpath
+                     );
+                 }
+
+
             }
 
             stage('部署') {
