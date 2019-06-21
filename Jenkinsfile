@@ -7,9 +7,14 @@ import hudson.model.*;
         echo "WORKSPACE Mr. ${env.WORKSPACE}";
         def basicSteps;
         def firstObj ;
+        def abc = "我是肖东红";
+        echo "abc1 = "+abc;
         try{
 
           stage('prepare') {
+            echo "prepare = abc2 = "+abc;
+            abc = "prepare";
+            echo "prepare-out = abc2 = "+abc;
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
@@ -26,6 +31,9 @@ import hudson.model.*;
            }
 
            stage('checkout') {
+            echo "checkoutin = abc3 = "+abc;
+            abc = "checkout";
+            echo "checkout-out = abc3 = "+abc;
               // 导出git的代码
                checkout(scm);
                basicSteps = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
@@ -46,6 +54,9 @@ import hudson.model.*;
 
 
             stage('Build') {
+                     echo "Build = abc4 = "+abc;
+                     abc = "Build";
+                     echo "Build-out = abc4 = "+abc;
                  println("build stage-使用maven进行打包");
 
                 // 判断pom.xml文件是否存在
@@ -85,7 +96,9 @@ import hudson.model.*;
 
 
             stage('Test') {
-
+                     echo "Test = abc4 = "+abc;
+                     abc = "Test";
+                     echo "Test-out = abc4 = "+abc;
               echo "做单元测试";
 
 
@@ -94,7 +107,9 @@ import hudson.model.*;
 
 
             stage('Deploy') {
-
+                     echo "Deploy = abc4 = "+abc;
+                     abc = "Deploy";
+                     echo "Deploy-out = abc4 = "+abc;
                 echo "必须有此条件，才可以部署";
                 if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                         println("Deploy stage");
@@ -105,6 +120,9 @@ import hudson.model.*;
         }catch(e){
            println('错误信息'+e.getMessage());
         }finally {
+                             echo "finally = abc4 = "+abc;
+                             abc = "finally";
+                             echo "finally-out = abc4 = "+abc;
                 // jdk的路径
                 def jdkResult = tool(name: 'jdk1.8', type: 'jdk');
                 println("jdkResult results ="+jdkResult);
