@@ -49,8 +49,13 @@ import hudson.model.*;
                firstObj = load ('jenkinsmodules/files/modules/PipelineUtilitySteps.groovy');
            }
 
+            stage('代码检查') {
+              echo "Test = abc4 = "+abc;
+              abc = "Test";
+              echo "做单元测试";
+            }
 
-            stage('Build') {
+            stage('构建') {
                  println("build stage-使用maven进行打包");
 
                 // 判断pom.xml文件是否存在
@@ -88,14 +93,13 @@ import hudson.model.*;
 
             }
 
-
-            stage('Test') {
+            stage('单元测试') {
               echo "Test = abc4 = "+abc;
               abc = "Test";
               echo "做单元测试";
             }
 
-            stage('Deploy') {
+            stage('部署') {
                      echo "Deploy = abc4 = "+abc;
                      abc = "Deploy";
                      echo "Deploy-out = abc4 = "+abc;
@@ -105,6 +109,20 @@ import hudson.model.*;
                  }
 
             }
+
+            stage("自动化测试"){
+                echo "selenium自动化测试+chrome的dirver进行页面功能测试";
+                echo "    1、下载具有selenium自动化测试+chrome的dirver的git代码";
+                echo "    2、运行自动化代码里面的bat文件";
+
+            //        checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                	//					    userRemoteConfigs: [[credentialsId: '6f4fa66c-eb02-46dc-a4b3-3a232be5ef6e',
+                	//						url: 'https://github.com/QAAutomationLearn/JavaAutomationFramework.git']]]);
+
+
+            }
+
+
 
             stage("methostest"){
                echo "执行尝试的代码";
