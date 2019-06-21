@@ -14,6 +14,22 @@ import hudson.model.*;
         try{
 
           stage('prepare') {
+                echo "执行尝试的代码";
+                def count =0;
+                 retry(3) {
+                   count= count+1;
+                   if(count==3){
+                     println "here we are test retry fuction"
+                     sleep 2
+                     echo "2秒之后，再执行";
+                     println 10/0
+                   }else{
+                     echo "count==3不再尝试了";
+                   }
+
+                 }
+
+
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
@@ -93,7 +109,6 @@ import hudson.model.*;
               echo "Test = abc4 = "+abc;
               abc = "Test";
               echo "做单元测试";
-
             }
 
             stage('Deploy') {
