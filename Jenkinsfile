@@ -154,7 +154,7 @@ import hudson.model.*;
                             println("Deploy stage");
                      }
                   basicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-                  basicStep.delete_Dir(baseGroovyFilePath);
+                  basicStep.deletecdir(baseGroovyFilePath);
                 }
             }
         }
