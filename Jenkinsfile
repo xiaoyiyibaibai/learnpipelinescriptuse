@@ -93,10 +93,8 @@ import hudson.model.*;
               echo "Test = abc4 = "+abc;
               abc = "Test";
               echo "做单元测试";
-              def  test1 = "i am in test stage";
-               echo "in teststage test1 = "+test1;
+
             }
-           echo "out teststage test1 = "+test1;
 
             stage('Deploy') {
                      echo "Deploy = abc4 = "+abc;
