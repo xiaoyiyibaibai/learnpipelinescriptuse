@@ -93,7 +93,7 @@ timestamps{
             }
 
             stage('单元测试') {
-                echo "做单元测试";
+                echo "做单元测试stage";
                 def mavenResult =tool(name: 'maven', type: 'maven');
                 println("maven的工具信息="+mavenResult);
                //执行sh的script脚本
