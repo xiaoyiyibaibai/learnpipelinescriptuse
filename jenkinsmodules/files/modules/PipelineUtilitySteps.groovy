@@ -3,7 +3,6 @@ import groovy.json.*;
 
 def echo_msg(msg){
     println("在groovy脚本中输出信息="+msg);
-
 }
 def find_files(filetype) {
     echo "find_files";

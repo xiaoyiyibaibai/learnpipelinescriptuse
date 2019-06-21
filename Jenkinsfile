@@ -155,7 +155,7 @@ import hudson.model.*;
                      }
                      //引入方法失败
                   def  secbasicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-                  secbasicStep.deletecdir(baseGroovyFilePath);
+                  secbasicStep.echo_msg2(baseGroovyFilePath);
                 }
             }
         }
