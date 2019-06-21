@@ -14,43 +14,6 @@ import hudson.model.*;
         try{
 
           stage('prepare') {
-                echo "执行尝试的代码";
-                def count =0;
-                count =0;
-                // 代码块最大执行时间，timeout单位是分，sleep单位是秒
-                timeout(1){
-                       count= count+1;
-                            println "here we are test retry fuction"
-                            sleep 1
-              }
-                    def count =1;
-                     //最大尝试执行次数是3
-                       retry(2) {
-                         count= count+1;
-                         if(count==2){
-                           echo "count==2不再尝试了";
-                         }else{
-                              println "here we are test retry fuction"
-                              sleep 2
-                              echo "2秒之后，再执行，除以0 异常，进入下一次尝试";
-                              println 10/0
-                         }
-
-                       }
-
-
-              def demo_string = "你好 Anthony"
-              out1 = demo_string.split()
-              out2 = demo_string.tokenize()
-              println out1
-              println out2
-              boolean b1 = out1 instanceof String[]
-              boolean b2 = out2 instanceof List
-              println b1
-              println b2
-
-
-
              if (currentBuild.previousBuild&&currentBuild.previousBuild.result == null) {
                   if(currentBuild.nextBuild){
                     println("skip this build"+currentBuild.id);
@@ -142,6 +105,46 @@ import hudson.model.*;
                  }
 
             }
+
+            stage("methostest"){
+               echo "执行尝试的代码";
+                            def count =0;
+                            count =0;
+                            // 代码块最大执行时间，timeout单位是分，sleep单位是秒
+                            timeout(1){
+                                   count= count+1;
+                                        println "here we are test retry fuction"
+                                        sleep 1
+                          }
+                                def count =1;
+                                 //最大尝试执行次数是3
+                                   retry(2) {
+                                     count= count+1;
+                                     if(count==2){
+                                       echo "count==2不再尝试了";
+                                     }else{
+                                          println "here we are test retry fuction"
+                                          sleep 2
+                                          echo "2秒之后，再执行，除以0 异常，进入下一次尝试";
+                                          println 10/0
+                                     }
+
+                                   }
+
+
+                          def demo_string = "你好 Anthony"
+                          out1 = demo_string.split()
+                          out2 = demo_string.tokenize()
+                          println out1
+                          println out2
+                          boolean b1 = out1 instanceof String[]
+                          boolean b2 = out2 instanceof List
+                          println b1
+                          println b2
+
+
+            }
+
 
         }catch(e){
            println('错误信息'+e.getMessage());
