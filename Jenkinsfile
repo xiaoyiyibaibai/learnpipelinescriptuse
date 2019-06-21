@@ -1,5 +1,6 @@
 import hudson.model.*;
     timestamps{
+    node{
         try{
         // 定义参数 如此定义的参数，需要在构建之前输入，才能进行构建
          //   properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
@@ -10,7 +11,6 @@ import hudson.model.*;
             echo "I said, Hello Mr. ${username}";
             echo "WORKSPACE Mr. ${env.WORKSPACE}";
             def basicStep;
-            node{
 
            // 进入node之后就有了workspace 具有了项目信息,但是没有源代码，所以在此处调用是报错的
              def workspace =  env.WORKSPACE;
@@ -153,15 +153,17 @@ import hudson.model.*;
                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                             println("Deploy stage");
                      }
-                     //引入方法失败
-                  def  secbasicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-                  secbasicStep.echo_msg2(baseGroovyFilePath);
+                     //引入方法成功加载其他的方法
+                  basicStep = load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
+                  basicStep.echo_msg2();
                 }
             }
         }
         catch(e){
            println('错误信息'+e.getMessage());
         }finally {
+               //做完了所有的step之后，将workspace删除
+                  basicStep.deletecdir();
                  if (currentBuild.result == 'UNSTABLE') {
                      echo 'I am unstable :/'
                  } else {
