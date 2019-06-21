@@ -153,8 +153,9 @@ import hudson.model.*;
                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                             println("Deploy stage");
                      }
-                  basicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
-                  basicStep.deletecdir(baseGroovyFilePath);
+                     //引入方法失败
+                  def  secbasicStep =  load('jenkinsmodules/files/modules/PipelineBasicSteps.groovy');
+                  secbasicStep.deletecdir(baseGroovyFilePath);
                 }
             }
         }

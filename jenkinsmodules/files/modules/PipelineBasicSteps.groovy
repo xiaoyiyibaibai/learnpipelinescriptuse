@@ -1,7 +1,8 @@
 import hudson.model.*;
 import hudson.util.*;
 import hudson.scm.*;
-
+import java.util.Collections;
+import java.util.Collection;
 def deletecdir(){
     echo "执行PipelineBasicSteps的deleteDir方法";
     def  lsresult =sh("ls -al ${env.WORKSPACE}");
