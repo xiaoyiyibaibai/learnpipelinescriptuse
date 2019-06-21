@@ -82,7 +82,7 @@ import hudson.model.*;
                    archiveArtifacts('pom.xml,Jenkinsfile');
                    println("归档 archiveArtifacts 'pom.xml,Jenkinsfile' 两个文件完成！");
                    // 已经将源代码导出到workspace中，使用load加载文件是
-                   firstObj = load ('jenkinsmodules/files/modules/PipelineFirst.groovy');
+                   firstObj = load ('jenkinsmodules/files/modules/PipelineUtilitySteps.groovy');
                    firstObj.echo_msg(baseGroovyFilePath);
 
 
