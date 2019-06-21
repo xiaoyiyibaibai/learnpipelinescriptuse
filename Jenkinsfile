@@ -125,7 +125,7 @@ timestamps{
 
             stage("常用指令模块"){
 
-               echo "执行尝试的代码";
+                echo "执行尝试的代码";
                 def count =0;
                 count =0;
                 // 代码块最大执行时间，timeout单位是分，sleep单位是秒
