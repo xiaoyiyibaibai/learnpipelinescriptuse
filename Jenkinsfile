@@ -116,7 +116,7 @@ import hudson.model.*;
                                         println "here we are test retry fuction"
                                         sleep 1
                           }
-                                def count =1;
+                                 count =1;
                                  //最大尝试执行次数是3
                                    retry(2) {
                                      count= count+1;
