@@ -2,7 +2,7 @@
 home: true
 heroImage: ./imgs/hero.jpg
 actionText: 快速上手 →
-actionLink: /zh/guide/,
+actionLink: /guid/,
 description: 集成问题追踪，文档管理，自动化构建部署于一体的系统架构
 features:
 - title: 简洁至上
