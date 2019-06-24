@@ -21,25 +21,37 @@ module.exports = {
             { text: '参考文档', link: 'https://segmentfault.com/a/1190000016333850'}, // 外部链接
         ],
         sidebar: {
-            '/java/': [
-                "",
-                "java1",
-                "java2",
-                "java3",
-                "java4",
+            '/java/': [{
+                title: "java学习",
+                children: [
+                    "",
+                    "java1",
+                    "java2",
+                    "java3",
+                    "java4",
+                 ]
+                }
               ],
-            "/vue/": [
+            "/vue/": [{
+                title: "vue学习",
+                children: [
                 "",
                 "vue1",
                 "vue2",
                 "vue3",
+                ]
+              }
+            ],
+              "/web/": [{
+                  title: "web学习",
+                  children: [
+                        "",
+                        "web1",
+                        "web2",
+                        "web3",
+                  ]
+                }
               ],
-              "/web/": [
-                "",
-                "web1",
-                "web2",
-                "web3",
-                ],
           },
           sidebarDepth: 2,  // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上
           lastUpdated: 'Last Updated',   // 文档更新时间：每个文件git最后提交的时间
