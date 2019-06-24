@@ -17,7 +17,7 @@ module.exports = {
                 ]
             },
             { text: '关于', link: '/about/' },
-            { text: '关于2', link: '/about.md' },
+            { text: '关于2', link: '/about2.md' },
             { text: '参考文档', link: 'https://segmentfault.com/a/1190000016333850'}, // 外部链接
         ],
         sidebar: {
