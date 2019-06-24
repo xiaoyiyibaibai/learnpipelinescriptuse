@@ -16,7 +16,8 @@ module.exports = {
                     { text: 'Web', link: '/web/' }
                 ]
             },
-            { text: '关于', link: '/about.md' },
+            { text: '关于', link: '/about/' },
+            { text: '关于2', link: '/about.md' },
             { text: '参考文档', link: 'https://segmentfault.com/a/1190000016333850'}, // 外部链接
         ],
         sidebar: {
@@ -33,14 +34,14 @@ module.exports = {
                 "vue2",
                 "vue3",
               ],
-          "/web/": [
-            "",
-            "web1",
-            "web2",
-            "web3",
-            ],
-      },
+              "/web/": [
+                "",
+                "web1",
+                "web2",
+                "web3",
+                ],
+          },
           sidebarDepth: 2,  // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上
           lastUpdated: 'Last Updated',   // 文档更新时间：每个文件git最后提交的时间
-      },
+  },
 }
