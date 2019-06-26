@@ -8,7 +8,9 @@ timestamps{
         def basicSteps;
         def firstObj ;
         // 是全局变量，在stage里面的修改都有效果
-
+        environment {CC='clang'}
+        echo env.CC
+        echo CC
         def abc = "我是肖东红";
         echo "abc1 = "+abc;
         try{

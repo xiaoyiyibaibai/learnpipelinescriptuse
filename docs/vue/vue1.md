@@ -17,3 +17,8 @@ ssss
 ## 内容2
 
 啦啦啦啦就
+
+---
+prev: false
+next: ./vue1
+---

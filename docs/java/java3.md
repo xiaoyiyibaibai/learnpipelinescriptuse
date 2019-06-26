@@ -17,3 +17,12 @@ ssss
 ## 内容2
 
 啦啦啦啦就
+
+---
+pageClass: custom-page-class
+---
+
+
+.theme-container.custom-page-class {
+  /* page-specific rules */
+}
