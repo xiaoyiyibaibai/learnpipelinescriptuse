@@ -7,11 +7,14 @@ package com.test.util;
  * @Date 2019/6/28 15:45
  **/
 public class Calculator2 {
-    public int add(int a, int b) {
-        return a + b;
-    }
-
-    public int sub(int a, int b) {
-        return a - b;
+    public int foo(int a,int b){
+        int returnInt = 0 ;
+        if(a<10){
+            returnInt +=1;
+        }
+        if(b<10){
+            returnInt +=10;
+        }
+        return returnInt;
     }
 }
