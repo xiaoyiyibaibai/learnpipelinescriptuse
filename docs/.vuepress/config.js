@@ -11,17 +11,16 @@ module.exports = {
         nav: [
             { text: '主页', link: '/' },
             { text: '快速上手', link: '/guid.md' },
-            { text: '博文',
+            { text: '功能', link: '/about2.md' },
+            { text: '设计', link: '/about2.md' },
+            { text: '手册',
                 items: [
-                    { text: 'Java', items: [
-                            { text: 'Web', link: '/web/' }
-                        ] },
                     { text: 'Web', link: '/web/' },
                     { text: 'vue', link: '/vue/' },
                     { text: 'ONES 帮助手册', link: '/Ones/' }
                 ]
             },
-            { text: '关于', link: '/about/' },
+            { text: '更多', link: '/about/' },
             { text: '关于2', link: '/about2.md' },
             { text: '参考文档', link: 'https://segmentfault.com/a/1190000016333850'}, // 外部链接
         ],
@@ -86,8 +85,8 @@ module.exports = {
                 children: [
                     "",
                     "About",
+                    "productinstruction.md",
                     "quicklystart",
-                    "web3",
                 ]
             }
             ],
