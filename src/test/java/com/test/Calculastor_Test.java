@@ -20,6 +20,6 @@ public class Calculastor_Test {
         int a = 10;
         int b = 20;
         int expected = -10;
-        Assert.assertEquals(expected, instance.foo(a, b));
+        Assert.assertNotEquals(expected, instance.foo(a, b));
     }
 }

@@ -2,7 +2,6 @@ package com.test;
 
 import static org.junit.Assert.*;
 
-import com.test.util.MathUtil;
 import com.test.util.MathUtil3;
 import org.junit.Test;
 public class MathUtilTest3 {
@@ -20,10 +19,10 @@ public class MathUtilTest3 {
     }
     @Test
     public void test_max_0_0_0(){
-        assertEquals(0, MathUtil.max(0, 0, 0));
+        assertEquals(0, MathUtil3.max(0, 0, 0));
     }
     @Test
     public void test_max_0_1_0(){
-        assertEquals(1, MathUtil.max(0, 1, 0));
+        assertEquals(1, MathUtil3.max(0, 1, 0));
     }
 }
