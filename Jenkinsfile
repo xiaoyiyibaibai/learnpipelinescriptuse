@@ -108,6 +108,8 @@ timestamps{
                     archiveArtifacts('mvntest.log');
                     junit(allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml')
                     archiveArtifacts(allowEmptyArchive: true, artifacts: '**/target/surefire-reports/*.xml')
+                    jacoco(execPattern: '**/target/jacoco.exec');
+
                  }
             }
 
