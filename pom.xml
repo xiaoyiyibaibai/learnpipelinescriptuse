@@ -101,7 +101,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
-
                 <!--使用命令行 mvn cobertura:cobertura-->
 
                 <executions>
