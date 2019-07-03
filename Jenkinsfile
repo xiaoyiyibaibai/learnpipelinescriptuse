@@ -108,6 +108,7 @@ timestamps{
                     echo "成功，归档mvn test 日志文件";
                     archiveArtifacts('mvntest.log');
                     junit(allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml')
+                    archiveArtifacts(allowEmptyArchive: true, artifacts: '\'**/target/surefire-reports/*.xml')
                  }
             }
 
