@@ -10,8 +10,17 @@ import lombok.Data;
  **/
 @Data
 public class TestService {
+    private  CustomService customService;
+    public TestService(){}
+    public TestService(CustomService customService){
+        this.customService = customService;
+    }
+
     private String name;
     public void print(){
+        if (customService!=null){
+            customService.show();
+        }
         System.out.println("动态载入bean,name="+name);
     }
 }

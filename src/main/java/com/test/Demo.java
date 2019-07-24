@@ -1,20 +1,23 @@
 package com.test;
 
-import com.test.service.TestService;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, DataSourceAutoConfiguration.class })
 public class Demo {
-
 	public static void main(String[] args) {
-
 		SpringApplication.run(Demo.class, args);
+	}
+}
+
+
+//@SpringBootApplication
+//public class Demo {
+
+//	public static void main(String[] args) {
+//		SpringApplication.run(Demo.class, args);
 //		ConfigurableApplicationContext ctx = SpringApplication.run(Demo.class, args);
 //		//获取BeanFactory
 //		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) ctx.getAutowireCapableBeanFactory();
@@ -53,5 +56,5 @@ public class Demo {
 //			System.out.println(testService2);
 //		}
 
-	}
-}
+//	}
+//}
